@@ -14,42 +14,40 @@ public class Compra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_compra;
+    private Long id_compra;
     @Column(nullable = false)
     private LocalDateTime fechaCompra;
     @Column(nullable = false)
     private String estado;
     @Column(nullable = false)
     private BigDecimal total;
-    @Column(nullable = false)
-    private long id_cliente;
+
 
     // ONE TO MANY
     @OneToMany(mappedBy = "detCompra", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("orden-compra")
     private List<Orden> ordenes;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    @JoinColumn(name = "cliente_id", nullable = false)
     @JsonBackReference
     private Cliente comprador;
 
     public Compra() {
     }
 
-    public Compra(long id_compra, LocalDateTime fecha, String estado, BigDecimal total, long id_cliente) {
+    public Compra(Long id_compra, LocalDateTime fecha, String estado, BigDecimal total) {
         this.id_compra = id_compra;
         this.fechaCompra = fecha;
         this.estado = estado;
         this.total = total;
-        this.id_cliente = id_cliente;
     }
 
-    public long getId_compra() {
+    public Long getId_compra() {
         return id_compra;
     }
 
-    public void setId_compra(long id_compra) {
+    public void setId_compra(Long id_compra) {
         this.id_compra = id_compra;
     }
 
@@ -77,15 +75,7 @@ public class Compra {
         this.total = total;
     }
 
-    public long getId_cliente() {
-        return id_cliente;
-    }
-
-    public void setId_cliente(long id_cliente) {
-        this.id_cliente = id_cliente;
-    }
-
-    public List<Orden> getOrdenes() {
+   public List<Orden> getOrdenes() {
         return ordenes;
     }
 

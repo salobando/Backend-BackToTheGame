@@ -12,7 +12,7 @@ import java.util.List;
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_producto;
+    private Long id_producto;
     @Column(nullable = false, length = 250)
     private String nombre;
     @Column(nullable = false, length = 250)
@@ -21,16 +21,14 @@ public class Producto {
     private BigDecimal precio;
     @Column(nullable = false)
     private int stock;
-    @Column(nullable = false)
-    private int id_categoria;
 
     // ONE TO MANY
     @OneToMany(mappedBy = "productos", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("orden-producto")
     private List<Orden> ordens;
 
     @ManyToOne
-    @JoinColumn(name = "categoria_id")
+    @JoinColumn(name = "categoria_id" , nullable = false)
     @JsonBackReference
     private Categoria categoria;
 
@@ -38,13 +36,12 @@ public class Producto {
 
     }
 
-    public Producto(long id_producto, String nombre, String descripcion, BigDecimal precio, int stock, int id_categoria) {
+    public Producto(long id_producto, String nombre, String descripcion, BigDecimal precio, int stock) {
         this.id_producto = id_producto;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
-        this.id_categoria = id_categoria;
     }
 
     public long getId_producto() {
@@ -85,14 +82,6 @@ public class Producto {
 
     public void setStock(int stock) {
         this.stock = stock;
-    }
-
-    public int getId_categoria() {
-        return id_categoria;
-    }
-
-    public void setId_categoria(int id_categoria) {
-        this.id_categoria = id_categoria;
     }
 
     public List<Orden> getOrdens() {

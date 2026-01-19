@@ -46,7 +46,6 @@ public class ProductoService implements IproductoService{
         if (productoExistente != null){
             //Actualizar los campos existentes
             productoExistente.setDescripcion(productoActual.getDescripcion());
-            productoExistente.setId_categoria(productoActual.getId_categoria());
             productoExistente.setNombre(productoActual.getNombre());
             productoExistente.setPrecio(productoActual.getPrecio());
             productoExistente.setStock(productoActual.getStock());

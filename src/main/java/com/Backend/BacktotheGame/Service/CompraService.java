@@ -49,7 +49,6 @@ public class CompraService implements IcompraService{
             compraExistente.setFechaCompra(compraActual.getFechaCompra());
             compraExistente.setTotal(compraActual.getTotal());
             compraExistente.setEstado(compraActual.getEstado());
-            compraExistente.setId_cliente(compraActual.getId_cliente());
 
             // Guardar actualzacion
             compraRepository.save(compraExistente);

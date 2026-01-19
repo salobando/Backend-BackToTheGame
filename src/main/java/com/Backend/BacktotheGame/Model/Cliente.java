@@ -11,7 +11,7 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_cliente;
+    private Long id_cliente;
     @Column(nullable = false, length = 100)
     private String nombre;
     @Column(nullable = false, length = 100)
@@ -31,7 +31,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(long id_cliente, String nombre, String apellido, String email, String clave, String telefono) {
+    public Cliente(Long id_cliente, String nombre, String apellido, String email, String clave, String telefono) {
         this.id_cliente = id_cliente;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -40,11 +40,11 @@ public class Cliente {
         this.telefono = telefono;
     }
 
-    public long getId_cliente() {
+    public Long getId_cliente() {
         return id_cliente;
     }
 
-    public void setId_cliente(long id_cliente) {
+    public void setId_cliente(Long id_cliente) {
         this.id_cliente = id_cliente;
     }
 
