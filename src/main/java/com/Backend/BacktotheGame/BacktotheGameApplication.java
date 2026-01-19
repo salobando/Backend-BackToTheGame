@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BacktotheGameApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BacktotheGameApplication.class, args);
+
+        SpringApplication.run(BacktotheGameApplication.class, args);
 	}
 
 }

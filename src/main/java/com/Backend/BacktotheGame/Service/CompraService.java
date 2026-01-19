@@ -15,6 +15,7 @@ public class CompraService implements IcompraService{
 
     @Autowired
     public CompraService(IcompraRepository compraRepository) {
+
         this.compraRepository = compraRepository;
     }
 

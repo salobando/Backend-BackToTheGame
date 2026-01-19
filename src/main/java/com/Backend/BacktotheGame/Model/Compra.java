@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "compra")
 public class Compra {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_compra;

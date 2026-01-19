@@ -15,6 +15,7 @@ public class ProductoService implements IproductoService{
 
     @Autowired
     public ProductoService(IproductoRepository iproductoRepository) {
+
         this.iproductoRepository = iproductoRepository;
     }
 

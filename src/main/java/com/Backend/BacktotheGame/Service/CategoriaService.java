@@ -41,7 +41,6 @@ public class CategoriaService implements IcategoriaService{
 
     @Override
     public void editarCategoria(Long id, Categoria categoriaActual) {
-
        Categoria categoriaExistente = categoriaRepository.findById(id).orElse(null);
 
         if (categoriaExistente != null){

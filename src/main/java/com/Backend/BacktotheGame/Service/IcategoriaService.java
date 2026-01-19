@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IcategoriaService {
+
     List<Categoria> obtenerTodos();
     Optional<Categoria> obtenerporId(Long id);
     void guardarCategoria(Categoria categoria);

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IcompraService {
+
     List<Compra> obtenerTodos();
     Optional<Compra> obtenerporId(Long id);
     void guardarCompra(Compra compra);

@@ -25,6 +25,7 @@ public class Producto {
 
 
     public Producto() {
+
     }
 
     public Producto(long id_producto, String nombre, String descripcion, long precio, int stock, int id_categoria) {

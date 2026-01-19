@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IclienteService {
+
     List<Cliente> obtenerTodos();
     Optional<Cliente> obtenerporId(Long id);
     void guardarCliente(Cliente cliente);
