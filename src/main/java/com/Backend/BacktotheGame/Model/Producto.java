@@ -1,6 +1,11 @@
 package com.Backend.BacktotheGame.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "producto")
@@ -13,22 +18,27 @@ public class Producto {
     @Column(nullable = false, length = 250)
     private String descripcion;
     @Column(nullable = false)
-    private long precio;
+    private BigDecimal precio;
     @Column(nullable = false)
     private int stock;
     @Column(nullable = false)
     private int id_categoria;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "categoria_id")
-    Categoria categoria;
+    // ONE TO MANY
+    @OneToMany(mappedBy = "productos", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Orden> ordens;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    @JsonBackReference
+    private Categoria categoria;
 
     public Producto() {
 
     }
 
-    public Producto(long id_producto, String nombre, String descripcion, long precio, int stock, int id_categoria) {
+    public Producto(long id_producto, String nombre, String descripcion, BigDecimal precio, int stock, int id_categoria) {
         this.id_producto = id_producto;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -61,11 +71,11 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public long getPrecio() {
+    public BigDecimal getPrecio() {
         return precio;
     }
 
-    public void setPrecio(long precio) {
+    public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
 
@@ -83,5 +93,21 @@ public class Producto {
 
     public void setId_categoria(int id_categoria) {
         this.id_categoria = id_categoria;
+    }
+
+    public List<Orden> getOrdens() {
+        return ordens;
+    }
+
+    public void setOrdens(List<Orden> ordens) {
+        this.ordens = ordens;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

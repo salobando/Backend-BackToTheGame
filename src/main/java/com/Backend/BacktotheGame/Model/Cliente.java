@@ -1,6 +1,9 @@
 package com.Backend.BacktotheGame.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "cliente")
@@ -19,6 +22,11 @@ public class Cliente {
     private String clave;
     @Column(nullable = false, length = 50)
     private String telefono;
+
+    // ONE TO MANY
+    @OneToMany(mappedBy = "comprador", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Compra> compras;
 
     public Cliente() {
     }
@@ -78,5 +86,13 @@ public class Cliente {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public List<Compra> getCompras() {
+        return compras;
+    }
+
+    public void setCompras(List<Compra> compras) {
+        this.compras = compras;
     }
 }

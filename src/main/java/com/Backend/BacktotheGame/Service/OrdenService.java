@@ -45,6 +45,8 @@ public class OrdenService implements IordenService{
 
         if (ordenExistente != null){
             //Actualizar los campos existentes
+            ordenExistente.setCantidadP(ordenActual.getCantidadP());
+            ordenExistente.setPrecioUnitario(ordenActual.getPrecioUnitario());
             ordenExistente.setId_compra(ordenActual.getId_compra());
             ordenExistente.setId_producto(ordenActual.getId_producto());
 

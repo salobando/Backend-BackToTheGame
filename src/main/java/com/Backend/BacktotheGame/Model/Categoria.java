@@ -1,5 +1,6 @@
 package com.Backend.BacktotheGame.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,8 +16,10 @@ public class Categoria {
     @Column(nullable = false, length = 250)
     private String descripcion;
 
-    @OneToMany(mappedBy = "categoria")
-    List<Producto> productos;
+    // ONE TO MANY
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Producto> productos;
 
     public Categoria() {
     }
@@ -49,5 +52,14 @@ public class Categoria {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 }

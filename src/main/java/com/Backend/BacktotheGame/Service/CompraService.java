@@ -46,7 +46,9 @@ public class CompraService implements IcompraService{
 
         if (compraExistente != null){
             //Actualizar los campos existentes
-            compraExistente.setCantidadP(compraActual.getCantidadP());
+            compraExistente.setFechaCompra(compraActual.getFechaCompra());
+            compraExistente.setTotal(compraActual.getTotal());
+            compraExistente.setEstado(compraActual.getEstado());
             compraExistente.setId_cliente(compraActual.getId_cliente());
 
             // Guardar actualzacion
