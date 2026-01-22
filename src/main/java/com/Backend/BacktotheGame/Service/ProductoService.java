@@ -49,6 +49,10 @@ public class ProductoService implements IproductoService {
         // Asociar la categoría al producto
         producto.setCategoria(categoria);
 
+        if (producto.getImagen() == null) {
+            producto.setImagen("https://via.placeholder.com/300");
+        }
+
         // Guardar producto
         productoRepository.save(producto);
     }
