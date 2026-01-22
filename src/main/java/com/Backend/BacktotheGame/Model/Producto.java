@@ -10,46 +10,52 @@ import java.util.List;
 @Entity
 @Table(name = "producto")
 public class Producto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_producto;
+    private Long idProducto;
+
     @Column(nullable = false, length = 250)
     private String nombre;
+
     @Column(nullable = false, length = 250)
     private String descripcion;
+
     @Column(nullable = false)
     private BigDecimal precio;
+
     @Column(nullable = false)
     private int stock;
 
+    @Column(nullable = false, length = 500)
+    private String imagen = "/img/default.jpg";
+
     // ONE TO MANY
-    @OneToMany(mappedBy = "productos", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("orden-producto")
     private List<Orden> ordens;
 
     @ManyToOne
-    @JoinColumn(name = "categoria_id" , nullable = false)
+    @JoinColumn(name = "categoria_id", nullable = false)
     @JsonBackReference
     private Categoria categoria;
 
     public Producto() {
-
     }
 
-    public Producto(long id_producto, String nombre, String descripcion, BigDecimal precio, int stock) {
-        this.id_producto = id_producto;
+    public Producto(String nombre, String descripcion, BigDecimal precio, int stock, String imagen) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
     }
 
-    public long getId_producto() {
-        return id_producto;
+    public Long getIdProducto() {
+        return idProducto;
     }
 
-    public void setId_producto(long id_producto) {
-        this.id_producto = id_producto;
+    public void setIdProducto(Long idProducto) {
+        this.idProducto = idProducto;
     }
 
     public String getNombre() {
@@ -98,5 +104,13 @@ public class Producto {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

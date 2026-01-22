@@ -1,7 +1,7 @@
 package com.Backend.BacktotheGame.Service;
 
 import com.Backend.BacktotheGame.Model.Categoria;
-import com.Backend.BacktotheGame.Repository.icategoriaRepository;
+import com.Backend.BacktotheGame.Repository.IcategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import java.util.Optional;
 @Service
 public class CategoriaService implements IcategoriaService{
 
-    private final icategoriaRepository categoriaRepository;
+    private final IcategoriaRepository categoriaRepository;
 
     @Autowired
-    public CategoriaService(icategoriaRepository icategoriaRepository) {
+    public CategoriaService(IcategoriaRepository icategoriaRepository) {
         categoriaRepository = icategoriaRepository;
     }
 

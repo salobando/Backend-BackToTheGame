@@ -12,16 +12,20 @@ public class Orden {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_orden;
+
     @Column(nullable = false)
     private int cantidadP;
+
     @Column(nullable = false)
     private BigDecimal precioUnitario;
 
+    // MUCHOS items de orden pertenecen a UN producto
     @ManyToOne
     @JoinColumn(name = "producto_id", nullable = false)
     @JsonBackReference("orden-producto")
-    private Producto productos;
+    private Producto producto;
 
+    // MUCHAS ordenes pertenecen a UNA compra
     @ManyToOne
     @JoinColumn(name = "compra_id", nullable = false)
     @JsonBackReference("orden-compra")
@@ -44,7 +48,6 @@ public class Orden {
         this.id_orden = id_orden;
     }
 
-
     public int getCantidadP() {
         return cantidadP;
     }
@@ -61,12 +64,12 @@ public class Orden {
         this.precioUnitario = precioUnitario;
     }
 
-    public Producto getProductos() {
-        return productos;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setProductos(Producto productos) {
-        this.productos = productos;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     public Compra getDetCompra() {
