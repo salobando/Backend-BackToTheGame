@@ -28,7 +28,7 @@ public class Producto {
     private int stock;
 
     @Column(nullable = false, length = 500)
-    private String imagen = "/img/default.jpg";
+    private String imagen;
 
     // ONE TO MANY
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
