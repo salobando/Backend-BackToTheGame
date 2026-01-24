@@ -45,4 +45,11 @@ public class ProductoController {
         iproductoService.editarProducto(id,productoActual);
         return  ResponseEntity.ok("Producto actualizado con exito");
     }
+
+    @GetMapping("/contar/categoria/{idCategoria}")
+    public ResponseEntity<Long> contarPorCategoria(@PathVariable Long idCategoria) {
+        Long total = iproductoService.contarProductosPorCategoria(idCategoria);
+        return ResponseEntity.ok(total);
+    }
+
 }

@@ -1,6 +1,9 @@
 package com.Backend.BacktotheGame.Service;
 
+import com.Backend.BacktotheGame.Model.Categoria;
+import com.Backend.BacktotheGame.Model.Cliente;
 import com.Backend.BacktotheGame.Model.Compra;
+import com.Backend.BacktotheGame.Repository.IclienteRepository;
 import com.Backend.BacktotheGame.Repository.IcompraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,11 +15,13 @@ import java.util.Optional;
 public class CompraService implements IcompraService{
 
     private final IcompraRepository compraRepository;
+    private final IclienteRepository clienteRepository;
 
     @Autowired
-    public CompraService(IcompraRepository compraRepository) {
+    public CompraService(IcompraRepository compraRepository, IclienteRepository clienteRepository) {
 
         this.compraRepository = compraRepository;
+        this.clienteRepository = clienteRepository;
     }
 
     @Override
@@ -31,6 +36,18 @@ public class CompraService implements IcompraService{
 
     @Override
     public void guardarCompra(Compra compra) {
+        // Validar que venga el cliente
+        if (compra.getComprador() == null || compra.getComprador().getId_cliente() == null) {
+            throw new RuntimeException("El cliente es obligatorio");
+        }
+
+        // Buscar la cliente real en la BD
+        Cliente cliente = clienteRepository
+                .findById(compra.getComprador().getId_cliente())
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrada"));
+
+        // Asociar la cliente a lña compra
+        compra.setComprador(cliente);
         compraRepository.save(compra);
     }
 
@@ -49,9 +66,21 @@ public class CompraService implements IcompraService{
             compraExistente.setFechaCompra(compraActual.getFechaCompra());
             compraExistente.setTotal(compraActual.getTotal());
             compraExistente.setEstado(compraActual.getEstado());
+            compraExistente.setComprador(compraActual.getComprador());
 
+            // Actualizar cliente si viene
+            if (compraExistente.getComprador() != null &&
+                    compraExistente.getComprador().getId_cliente() != null) {
+
+                Cliente cliente = clienteRepository
+                        .findById(compraActual.getComprador().getId_cliente())
+                        .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
+                compraExistente.setComprador(cliente);
+            }
             // Guardar actualzacion
             compraRepository.save(compraExistente);
+
         } else {
             throw new RuntimeException("Compra no encontrada por el id: " + id);
         }

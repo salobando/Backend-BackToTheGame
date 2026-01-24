@@ -73,7 +73,11 @@ public class ProductoService implements IproductoService {
             productoExistente.setDescripcion(productoActual.getDescripcion());
             productoExistente.setPrecio(productoActual.getPrecio());
             productoExistente.setStock(productoActual.getStock());
-            productoExistente.setImagen(productoActual.getImagen());
+
+            // actualizar imagen si viene
+            if (productoActual.getImagen() != null) {
+                productoExistente.setImagen(productoActual.getImagen());
+            }
 
             // Actualizar categoría si viene
             if (productoActual.getCategoria() != null &&
@@ -91,5 +95,10 @@ public class ProductoService implements IproductoService {
         } else {
             throw new RuntimeException("Producto no encontrado por el id: " + id);
         }
+    }
+
+    @Override
+    public Long contarProductosPorCategoria(Long idCategoria) {
+        return productoRepository.contarPorCategoria(idCategoria);
     }
 }
