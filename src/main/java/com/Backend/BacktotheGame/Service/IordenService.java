@@ -1,5 +1,6 @@
 package com.Backend.BacktotheGame.Service;
 
+import com.Backend.BacktotheGame.DTO.ProductoTopDTO;
 import com.Backend.BacktotheGame.Model.Orden;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface IordenService {
 
     void eliminarOrden(Long id);
     void editarOrden(Long id, Orden ordenActual);
+    List<ProductoTopDTO> obtenerProductosMasVendidos();
 }

@@ -1,5 +1,6 @@
 package com.Backend.BacktotheGame.Service;
 
+import com.Backend.BacktotheGame.DTO.ProductoTopDTO;
 import com.Backend.BacktotheGame.Model.Compra;
 import com.Backend.BacktotheGame.Model.Orden;
 import com.Backend.BacktotheGame.Model.Producto;
@@ -107,4 +108,10 @@ public class OrdenService implements IordenService{
             throw new RuntimeException("Orden no encontrada por el id: " + id);
         }
     }
+
+    @Override
+    public List<ProductoTopDTO> obtenerProductosMasVendidos() {
+        return ordenRepository.obtenerProductosMasVendidos();
+    }
+
 }
