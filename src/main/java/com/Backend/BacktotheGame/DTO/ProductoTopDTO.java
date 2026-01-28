@@ -24,7 +24,6 @@ public class ProductoTopDTO {
     }
 
 
-
     public Long getTotalVendido() {
         return totalVendido;
     }

@@ -1,11 +1,13 @@
 package com.Backend.BacktotheGame.Service;
 
+
 import com.Backend.BacktotheGame.Model.Categoria;
 import com.Backend.BacktotheGame.Model.Producto;
 import com.Backend.BacktotheGame.Repository.IcategoriaRepository;
 import com.Backend.BacktotheGame.Repository.IproductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -100,5 +102,25 @@ public class ProductoService implements IproductoService {
     @Override
     public Long contarProductosPorCategoria(Long idCategoria) {
         return productoRepository.contarPorCategoria(idCategoria);
+    }
+
+    @Transactional
+    public void comprarProducto(Long idProducto, int cantidad) {
+
+        Producto producto = productoRepository.findById(idProducto)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+        // Validar stock disponible
+        if (producto.getStock() < cantidad) {
+            throw new RuntimeException(
+                    "Stock insuficiente. Disponible: " + producto.getStock()
+            );
+        }
+
+        // Descontar stock
+        producto.setStock(producto.getStock() - cantidad);
+
+        // Guardar cambio
+        productoRepository.save(producto);
     }
 }

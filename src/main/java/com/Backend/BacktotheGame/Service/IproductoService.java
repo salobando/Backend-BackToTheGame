@@ -13,5 +13,6 @@ public interface IproductoService {
 
     void eliminarProducto(Long id);
     void editarProducto(Long id, Producto productoActual);
+    void comprarProducto(Long idProducto, int cantidad);
     Long contarProductosPorCategoria(Long idCategoria);
 }

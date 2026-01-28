@@ -1,9 +1,14 @@
 package com.Backend.BacktotheGame.Controller;
 
+import com.Backend.BacktotheGame.DTO.OrdenRequestDTO;
 import com.Backend.BacktotheGame.Model.Producto;
+import com.Backend.BacktotheGame.Repository.IproductoRepository;
 import com.Backend.BacktotheGame.Service.IproductoService;
+import com.Backend.BacktotheGame.Service.ProductoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.Backend.BacktotheGame.DTO.CompraRequestDTO;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -51,5 +56,17 @@ public class ProductoController {
         Long total = iproductoService.contarProductosPorCategoria(idCategoria);
         return ResponseEntity.ok(total);
     }
+
+    @PostMapping("/comprar")
+    public ResponseEntity<String> comprarProducto(@RequestBody CompraRequestDTO request) {
+
+        iproductoService.comprarProducto(
+                request.getIdProducto(),
+                request.getCantidad()
+        );
+
+        return ResponseEntity.ok("Compra realizada con éxito");
+    }
+
 
 }
